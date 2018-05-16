@@ -176,7 +176,7 @@ class Net:
     def eval(self,x ):
         with self.graph.as_default() :
             if self.output is None :
-                print ' after doing init(), call eval()'
+                print (' after doing init(), call eval()' )
                 return
             feed = {self.input:x}
             ret =  self.sess.run(self.output , feed_dict = feed)
@@ -256,6 +256,9 @@ class _Saver:
 
 def is_old_tensorflow_versioin ( old_major_version = 0, old_minor_version = 6 ):
     ver_list = tf.__version__.split ( '.' )
+    if  type(ver_list[0] ) == str : 
+        ver_list[0] = int(ver_list[0])
+        ver_list[1] = int(ver_list[1])
     major = ver_list[0]
     minor = ver_list[1]
     if major <= old_major_version and minor <= old_minor_version :
